@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Builder's Playbook // Claude CoWork</title>
+    <style>
+        :root {
+            --bg-main: #0d1117;
+            --bg-card: #161b22;
+            --bg-code: #0b0e14;
+            --border: #30363d;
+            --accent: #58a6ff;
+            --accent-green: #3fb950;
+            --accent-amber: #d29922;
+            --text-primary: #c9d1d9;
+            --text-muted: #8b949e;
+            --text-bright: #f0f6fc;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 40px 16px;
+        }
+
+        .container {
+            max-width: 860px;
+            margin: 0 auto;
+        }
+
+        .header-card {
+            background: linear-gradient(135deg, #1f2937, #111827);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 28px;
+        }
+
+        .header-card h1 {
+            color: var(--text-bright);
+            font-size: 1.85rem;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+
+        .letter {
+            color: var(--text-primary);
+            font-size: 1rem;
+            border-left: 3px solid var(--accent);
+            padding-left: 16px;
+            margin-top: 14px;
+            font-style: italic;
+        }
+
+        .step-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .step-badge {
+            display: inline-block;
+            background: rgba(88, 166, 255, 0.15);
+            color: var(--accent);
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 3px 10px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: var(--text-bright);
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+        }
+
+        p, ul {
+            margin-bottom: 14px;
+            font-size: 0.95rem;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 6px;
+        }
+
+        .screenshot-box {
+            background-color: var(--bg-code);
+            border: 1px dashed var(--border);
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        .screenshot-box .icon {
+            font-size: 1.5rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .prompt-container {
+            margin-top: 14px;
+            background-color: var(--bg-code);
+            border: 1px solid #21262d;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .prompt-header {
+            background-color: #161b22;
+            padding: 10px 14px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #21262d;
+        }
+
+        .copy-btn {
+            background: #238636;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 6px 12px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.15s ease, transform 0.05s ease;
+            user-select: none;
+        }
+
+        .copy-btn:hover {
+            background: #2ea043;
+        }
+
+        .copy-btn:active {
+            transform: scale(0.97);
+        }
+
+        .copy-btn.copied {
+            background: #1f6feb;
+        }
+
+        pre {
+            padding: 16px;
+            color: #e6edf3;
+            font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+            font-size: 0.88rem;
+            white-space: pre-wrap;
+            word-break: break-word;
+            user-select: all;
+        }
+
+        .rule-item {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid var(--accent-amber);
+            padding: 10px 14px;
+            margin: 8px 0;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+<main class="container">
+
+    <header class="header-card">
+        <h1>Duncan's CoWork Playbook</h1>
+        <div class="letter">
+            "I see myself at your age when we talk. Same drive, same hunger, lots to prove to the world—not fully sure how yet, but dead certain you will. Perseverance is the number one trait every CEO shares. Keep your gloves up. Always get up. Master this workflow first; we tackle Antigravity next."
+        </div>
+    </header>
+
+    <!-- Step 1 -->
+    <section class="step-card">
+        <span class="step-badge">Step 01</span>
+        <h2>Environment & Tool Setup</h2>
+        <p>Before building, set up your workbench. Get everything plugged in and authorized so Claude has direct access to execution tools.</p>
+        
+        <ul>
+            <li><strong>Download Claude Desktop:</strong> Ensure you are on the latest desktop client.</li>
+            <li><strong>Install Claude Chrome Extension:</strong> Grants browser context & research capabilities.</li>
+            <li><strong>Connect Integrations:</strong> Hook in Google Drive and enable relevant workspace skills in settings.</li>
+            <li><strong>Create Project Folder:</strong> Create a brand-new, dedicated Project folder in Claude for this build.</li>
+        </ul>
+
+        <div class="screenshot-box">
+            <span class="icon">🖼️</span>
+            <strong>[Screenshot Placeholder: Claude Desktop Project Setup]</strong><br>
+            Left sidebar &rarr; Projects &rarr; "Create Project" &rarr; Name your workspace &rarr; Attach Google Drive skill under Project settings.
+        </div>
+    </section>
+
+    <!-- Step 2 -->
+    <section class="step-card">
+        <span class="step-badge">Step 02</span>
+        <h2>The Messy Brain Dump &rarr; Elite Prompt Converter</h2>
+        <p>Never worry about phrasing things cleanly on your first pass. Unload raw thoughts, half-baked mechanics, and random requirements into a standard Claude chat. Use this prompt to turn your chaotic brain dump into a sharp operational prompt for CoWork.</p>
+
+        <div class="prompt-container">
+            <div class="prompt-header">
+                <span>Prompt 1: Raw Brain Dump Transformer</span>
+                <button class="copy-btn" onclick="copyPrompt('p1', this)">Copy Prompt</button>
+            </div>
+            <pre id="p1">I am going to brain dump a raw, disorganized concept for a tool/system I want to build. 
+
+Your job is to:
+1. Extract the core objective, functional mechanics, and desired end state.
+2. Structure this into a high-octane, precise master prompt tailored for Claude CoWork to execute.
+3. Clean up the logic without losing any of my original intent.
+
+Here is my raw brain dump:
+[INSERT YOUR UNFILTERED BRAIN DUMP HERE]</pre>
+        </div>
+    </section>
+
+    <!-- Step 3 -->
+    <section class="step-card">
+        <span class="step-badge">Step 03</span>
+        <h2>The Living Constitution (Rules & Guardrails)</h2>
+        <p>A great autonomous agent needs boundaries and operating principles. Create a file in your project called <code>CONSTITUTION.md</code>. This document grows every time Claude makes an assumption you don't like or violates your workflow preferences.</p>
+
+        <div class="rule-item"><strong>Rule 1 (Living Doc):</strong> Every time an edge-case is discovered, update the Constitution immediately.</div>
+        <div class="rule-item"><strong>Rule 2 (No Hallucinated Paths):</strong> If a required API, tool, or credential is missing, flag it immediately.</div>
+        <div class="rule-item"><strong>Rule 3 (Safe & Compliant):</strong> Build like water down a hill—find the fastest path, but stay completely safe and compliant.</div>
+
+        <div class="prompt-container">
+            <div class="prompt-header">
+                <span>Prompt 2: Generate Project Constitution</span>
+                <button class="copy-btn" onclick="copyPrompt('p2', this)">Copy Prompt</button>
+            </div>
+            <pre id="p2">Based on our project scope, draft a concise, binding "Project Constitution" (Rules of Engagement).
+
+Include:
+1. Operational guardrails (fastest path, legal/compliant, modular code/structure).
+2. Decision-making protocol (when to execute vs. when to pause and ask me).
+3. A blank 'Living Rulebook' section where we will append new rules whenever mistakes happen or preferences change.
+
+Format this in clean Markdown so I can save it as CONSTITUTION.md in our project root.</pre>
+        </div>
+    </section>
+
+    <!-- Step 4 -->
+    <section class="step-card">
+        <span class="step-badge">Step 04</span>
+        <h2>Blind Spots, Traps & SWOT Analysis</h2>
+        <p>Amateurs jump straight into building; pros stress-test their thinking. Force Claude to uncover what you are failing to consider.</p>
+
+        <div class="prompt-container">
+            <div class="prompt-header">
+                <span>Prompt 3: Blind Spots & Traps Interrogation</span>
+                <button class="copy-btn" onclick="copyPrompt('p3', this)">Copy Prompt</button>
+            </div>
+            <pre id="p3">Act as a ruthless technical auditor and senior systems architect. 
+
+Review our project charter and constitution, then run a comprehensive interrogation:
+1. **Blind Spots:** What critical factors am I failing to consider (technical bottlenecks, edge cases, user friction)?
+2. **Hidden Traps:** What assumptions seem simple on paper but are dangerous rabbit holes to build?
+3. **SWOT Matrix:** Give me a rigorous Strengths, Weaknesses, Opportunities, and Threats breakdown.
+4. **Pre-Mortem:** If this project fails or becomes abandoned in 2 weeks, what was the exact reason?
+
+Be direct, candid, and challenge my assumptions.</pre>
+        </div>
+    </section>
+
+    <!-- Step 5 -->
+    <section class="step-card">
+        <span class="step-badge">Step 05</span>
+        <h2>Launch CoWork: The 4+1 Decision Loop</h2>
+        <p>Once your Project Charter and Constitution are saved in the project folder, open CoWork. Lock it into the interactive decision loop so it never gets stuck or makes blind guesses.</p>
+
+        <div class="screenshot-box">
+            <span class="icon">⚙️</span>
+            <strong>[Screenshot Placeholder: CoWork Execution Mode]</strong><br>
+            Project selected &rarr; CoWork enabled &rarr; Input Master Directive prompt below.
+        </div>
+
+        <div class="prompt-container">
+            <div class="prompt-header">
+                <span>Prompt 4: CoWork Master Directive</span>
+                <button class="copy-btn" onclick="copyPrompt('p4', this)">Copy Prompt</button>
+            </div>
+            <pre id="p4">You are now operating as my lead autonomous builder in Claude CoWork.
+
+Adhere strictly to CONSTITUTION.md and the Project Charter.
+
+OPERATING PROTOCOL:
+1. Act like water flowing down a hill: find the fastest, cleanest, most robust path to the end state.
+2. If you are ever unsure of a detail, lack access, or reach an architectural crossroad, DO NOT guess or stall.
+3. Pause and present:
+   - The exact core question/decision.
+   - 4 recommended options in priority order (Ranked #1 to #4 with a 1-sentence rationale for each).
+   - Option 5: "Choose Your Own Adventure" (A custom input prompt for my direct instruction).
+4. As you work, request tool permissions, file creation access, and skill authorizations as needed.
+
+Acknowledge these operating terms and outline your first immediate step.</pre>
+        </div>
+    </section>
+
+</main>
+
+<script>
+function copyPrompt(id, btnElement) {
+    const preElement = document.getElementById(id);
+    const text = preElement.innerText || preElement.textContent;
+
+    const showSuccess = () => {
+        const originalText = btnElement.innerText;
+        btnElement.innerText = "Copied! ✓";
+        btnElement.classList.add('copied');
+        setTimeout(() => {
+            btnElement.innerText = originalText;
+            btnElement.classList.remove('copied');
+        }, 2000);
+    };
+
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(showSuccess).catch(() => fallbackCopy(text, showSuccess));
+    } else {
+        fallbackCopy(text, showSuccess);
+    }
+}
+
+function fallbackCopy(text, callback) {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    textArea.style.position = "fixed";
+    textArea.style.left = "-9999px";
+    textArea.style.top = "0";
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+        document.execCommand('copy');
+        callback();
+    } catch (err) {
+        console.error('Copy fallback failed', err);
+    }
+    document.body.removeChild(textArea);
+}
+</script>
+
+</body>
+</html>
